@@ -28,7 +28,7 @@ async function main() {
     await client.query(`
         CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        name VARCHAR(20),
+        name VARCHAR(255),
         description TEXT,
         price INTEGER,
         stock INTEGER default 0,
@@ -61,9 +61,12 @@ async function main() {
 
     for (const product of products) {
         const { title, description, price, stock, thumbnail, category } = product;
-        const categoryId = await client.query(`
-            SELECT id FROM categories WHERE name = $1
-        `, [category]);
+        const categoryResult = await client.query(
+            "SELECT id FROM categories WHERE name = $1",
+            [product.category]
+        );
+
+        const categoryId = categoryResult.rows[0].id;
 
         await client.query(`
             INSERT INTO products (name, description, price, stock, image_url, category_id)
