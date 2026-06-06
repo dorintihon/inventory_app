@@ -11,6 +11,18 @@ async function getHomePage(req, res) {
     }
 }
 
+async function getProductsPage(req, res) {
+    try {
+        const products = await db.getAllProducts();
+        res.render('products', {products});
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+
 module.exports = {
-    getHomePage
+    getHomePage,
+    getProductsPage,
 };

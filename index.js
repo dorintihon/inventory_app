@@ -1,5 +1,6 @@
 const express = require('express');
 const indexRouter = require('./routes/indexRouter.js');
+const categoryRouter = require('./routes/categoryRouter.js');
 const path = require('node:path');
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/', indexRouter);
+app.use('/categories', categoryRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

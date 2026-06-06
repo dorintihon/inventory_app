@@ -6,18 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Categories</h1>
-    <ul>
-        <% categories.forEach(category => { %>
-            <li><%= category.name %></li>
-        <% }); %>
-    </ul>
+    <%- include('navbar') %>
 
-    <h1>Products</h1>
-    <ul>
-        <% products.forEach(product => { %>
-            <li><%= product.name %> - <%= product.price %></li>
-        <% }); %>
-    </ul>
+        <h1>Welcome to the Inventory App</h1>
+        <p>Your one-stop solution for managing inventory efficiently.</p>
+        <div class="links">
+            <a href="/products">View Products //TO DO</a>
+            <a href="/categories">View Categories</a>
+        </div>
 </body>
 </html>
