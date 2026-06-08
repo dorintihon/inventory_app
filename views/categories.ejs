@@ -11,7 +11,7 @@
     <h1>All Categories in Inventory</h1>
     <ul>
         <% categories.forEach(category => { %>
-            <%- include('category', {category: category}) %>
+            <li><a href="/categories/<%= category.id %>"><%= category.name %></a></li>
         <% }); %>
     </ul>
 </body>

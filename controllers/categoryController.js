@@ -13,10 +13,10 @@ async function getAllCategories(req, res) {
 async function getCategoryById(req, res) {
     const categoryId = req.params.id;
     try {
-        const categories = await db.getAllCategories();
-        const category = categories.find(c => c.id === parseInt(categoryId));
+        const category = await db.getCategoryById(categoryId);
+        const products = await db.getProductsByCategoryId(categoryId);
         if (category) {
-            res.render('category', {category});
+            res.render('category', {category, products});
         } else {
             res.status(404).send("Category not found");
         }
@@ -26,7 +26,9 @@ async function getCategoryById(req, res) {
     }
 }
 
+
+
 module.exports = {
     getAllCategories,
-    getCategoryById
+    getCategoryById,
 };

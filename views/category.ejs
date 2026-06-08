@@ -1,3 +1,9 @@
 <div class="category">
-    <a href="/categories/<%= category.id %>"><%= category.name %></a>
+    <p><%= category.name %></p>
+
+    <ul>
+        <% products.forEach(product => { %>
+            <li><%= product.name %></li>
+        <% }) %>
+    </ul>
 </div>

@@ -11,11 +11,21 @@ async function getAllProducts() {
     return rows;
 }
 
+async function getCategoryById(id) {
+    const {rows} = await pool.query('SELECT * FROM categories WHERE id = $1', [id]);
+    return rows[0];
+}
+
+async function getProductsByCategoryId(categoryId) {
+    const {rows} = await pool.query('SELECT * FROM products WHERE category_id = $1', [categoryId]);
+    return rows;
+}
+
 
 module.exports = {
     getAllCategories,
-    getAllProducts
+    getAllProducts,
+    getCategoryById,
+    getProductsByCategoryId
 };
 
-getAllCategories();
-getAllProducts();
