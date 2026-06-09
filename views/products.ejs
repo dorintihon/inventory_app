@@ -11,7 +11,7 @@
     <h1>All Products in Inventory</h1>
     <ul>
         <% products.forEach(product => { %>
-            <%- include('product', {product: product}) %>
+            <li><a href="/products/<%= product.id %>"><%= product.name %> (<%= product.category_name %>)</a></li>
         <% }); %>
     </ul>
 </body>

@@ -1,6 +1,7 @@
 const express = require('express');
 const indexRouter = require('./routes/indexRouter.js');
 const categoryRouter = require('./routes/categoryRouter.js');
+const productRouter = require('./routes/productRouter.js');
 const path = require('node:path');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/', indexRouter);
 app.use('/categories', categoryRouter);
+app.use('/products', productRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
