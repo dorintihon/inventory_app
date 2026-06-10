@@ -1,5 +1,8 @@
 <div class="category">
     <p><%= category.name %></p>
+    <form action="/categories/<%= category.id %>/delete" method="POST">
+        <button type="submit">Delete Category</button>
+    </form>
 
     <ul>
         <% products.forEach(product => { %>

@@ -26,6 +26,10 @@ async function createCategory(name) {
     await pool.query('INSERT INTO categories (name) VALUES ($1)', [name]);
 }
 
+async function deleteCategory(id) {
+    await pool.query('DELETE FROM categories WHERE id = $1', [id]);
+}
+
 
 //Products
 async function getAllProducts() {
@@ -83,6 +87,7 @@ module.exports = {
     getTotalCategories,
     getTotalProducts,
     createProduct,
-    createCategory
+    createCategory,
+    deleteCategory
 };
 

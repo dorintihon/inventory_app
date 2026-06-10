@@ -41,9 +41,21 @@ async function createCategory(req, res) {
     }
 }
 
+async function deleteCategory(req, res) {
+    const categoryId = req.params.id;
+    try {
+        await db.deleteCategory(categoryId);
+        res.redirect('/categories');
+    } catch (error) {
+        console.error("Error deleting category:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
 module.exports = {
     getAllCategories,
     getCategoryById,
     getNewCategoryForm,
-    createCategory
+    createCategory,
+    deleteCategory
 };
