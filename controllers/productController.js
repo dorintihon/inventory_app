@@ -25,7 +25,42 @@ async function getProductById(req, res) {
     }
 }
 
+async function getNewProductForm(req, res) {
+    try {
+        const categories = await db.getAllCategories();
+        res.render('forms/new_product', { categories });
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+async function createProduct(req, res) {
+    const { name, description, price, stock, image_url, category_id } = req.body;
+    try {
+        await db.createProduct(name, description, price, stock, image_url, category_id);
+        res.redirect('/products');
+    } catch (error) {
+        console.error("Error creating product:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+async function deleteProduct(req, res) {
+    const { id } = req.params;
+    try {
+        await db.deleteProduct(id);
+        res.redirect('/products');
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
+    createProduct,
+    getNewProductForm,
+    deleteProduct
 };
