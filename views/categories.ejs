@@ -9,6 +9,7 @@
     <%- include('navbar') %>
 
     <h1>All Categories in Inventory</h1>
+    <a href="/categories/new_category">Add New Category</a>
     <ul>
         <% categories.forEach(category => { %>
             <li><a href="/categories/<%= category.id %>"><%= category.name %></a></li>

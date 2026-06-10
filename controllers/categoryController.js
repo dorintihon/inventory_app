@@ -26,9 +26,24 @@ async function getCategoryById(req, res) {
     }
 }
 
+async function getNewCategoryForm(req, res) {
+    res.render('forms/new_category');
+}
 
+async function createCategory(req, res) {
+    const { name } = req.body;
+    try {
+        await db.createCategory(name);
+        res.redirect('/categories');
+    } catch (error) {
+        console.error("Error creating category:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
 
 module.exports = {
     getAllCategories,
     getCategoryById,
+    getNewCategoryForm,
+    createCategory
 };

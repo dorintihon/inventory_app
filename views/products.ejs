@@ -9,6 +9,7 @@
     <%- include('navbar') %>
 
     <h1>All Products in Inventory</h1>
+    <a href="/products/new_product">Add New Product</a>
     <ul>
         <% products.forEach(product => { %>
             <li><a href="/products/<%= product.id %>"><%= product.name %> (<%= product.category_name %>)</a></li>
