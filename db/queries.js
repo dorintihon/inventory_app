@@ -26,8 +26,12 @@ async function createCategory(name) {
     await pool.query('INSERT INTO categories (name) VALUES ($1)', [name]);
 }
 
-async function deleteCategory(id) {
-    await pool.query('DELETE FROM categories WHERE id = $1', [id]);
+async function deleteCategory(id, password) {
+    if (await checkPassword(password)) {
+        await pool.query('DELETE FROM categories WHERE id = $1', [id]);
+    } else {
+        throw new Error('Unauthorized Password: ' + password);
+    }
 }
 
 
@@ -77,8 +81,21 @@ async function createProduct(name, description, price, stock, imageUrl, category
     );
 }
 
-async function deleteProduct(id) {
-    await pool.query('DELETE FROM products WHERE id = $1', [id]);
+async function deleteProduct(id, password) {
+    if (await checkPassword(password)) {
+        await pool.query('DELETE FROM products WHERE id = $1', [id]);
+    } else {
+        throw new Error(`Unauthorized Password: ${password}`);
+    }
+}
+
+//security
+async function checkPassword(password) {
+    const { rows } = await pool.query('SELECT password_hash FROM users WHERE username = $1', ['admin']);
+    if (rows.length === 0) {
+        return false;
+    }
+    return rows[0].password_hash === password;
 }
 
 

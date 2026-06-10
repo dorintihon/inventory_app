@@ -43,8 +43,9 @@ async function createCategory(req, res) {
 
 async function deleteCategory(req, res) {
     const categoryId = req.params.id;
+    const { password } = req.body;
     try {
-        await db.deleteCategory(categoryId);
+        await db.deleteCategory(categoryId, password);
         res.redirect('/categories');
     } catch (error) {
         console.error("Error deleting category:", error);

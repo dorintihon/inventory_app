@@ -48,8 +48,9 @@ async function createProduct(req, res) {
 
 async function deleteProduct(req, res) {
     const { id } = req.params;
+    const { password } = req.body;
     try {
-        await db.deleteProduct(id);
+        await db.deleteProduct(id, password);
         res.redirect('/products');
     } catch (error) {
         console.error("Error deleting product:", error);
